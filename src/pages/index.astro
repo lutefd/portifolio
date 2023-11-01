@@ -11,14 +11,14 @@ const posts = sortPosts(await getCollection("blog", ({data})=> data.isDraft !==t
 ---
 <Base {title} description="Luis Dourado's personal website and blog">
   <a href="https://github.com/lutefd" target="_blank" slot="header-content" class="text-primary/40 text-2xl font-light group-hover:text-primary transition-colors duration-700">lutefd</a>
-  <main class=" pb-12">
+  <main class=" pb-8 md:pb-12">
     <p class="text-primary max-w-prose border-b-[0.5px] border-zinc-500 text-lg pb-6 ">
       <small>
         Hi, I'm Lutefd aka Luis Dourado , a software engineer from Brazil. I'm currently working at <Link href="https://www.sensedia.com/">Sensedia</Link> as a full-stack developer. I mainly work with <strong>Typescript</strong>, <strong>Golang</strong> and a number of frontend frameworks, as well as some DevOps tools.
       </small>
     </p>
   </main>
-  <section class="pb-12">
+  <section class="pb-8 md:pb-12">
     <div class="flex flex-col pb-10 group">
       <h2 class="text-xl text-primary font-semibold mb-2">Projects</h2>
       <p class="text-xs text-zinc-400/90 group-hover:text-primary transition-colors duration-700">Latest projects I've been working on</p>
