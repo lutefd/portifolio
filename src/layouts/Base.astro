@@ -1,12 +1,12 @@
 ---
 import { ViewTransitions, fade } from "astro:transitions";
+import '@fontsource-variable/jetbrains-mono';
 import Link from '@/components/Link'
 type Props = {
     title: string
     description: string
     image?: string
 }
-
 const {pathname} = Astro.url
 const { title, description, image} = Astro.props
 
@@ -39,6 +39,9 @@ else {
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         {image && <meta property="og:image" content={image} />}
+
+        <link as="font" rel="preload" href="/fonts/Geist/GeistVF.ttf" type="font/ttf" crossorigin="anonymous" />
+        <link as="font" rel="preload" href="/fonts/Geist.Mono/Geist Mono/GeistMonoVF.ttf" type="font/ttf" crossorigin="anonymous" />
     
     </head>
 
@@ -95,3 +98,9 @@ else {
 
 
 </script>
+
+<style is:global>
+    body{
+        font-family: 'JetBrains Mono', monospace;
+    }
+</style>
