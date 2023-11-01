@@ -1,27 +1,27 @@
 ---
-import '@/styles/globals.css'
+import "@/styles/globals.css";
 
 import { getCollection } from "astro:content";
 import ArticlePreview from "@/components/ArticlePreview.astro";
 import { sortPosts } from "@/lib/utils";
 import Base from "@/layouts/Base.astro";
-const posts = sortPosts(await getCollection("blog",({data})=> data.isDraft !==true))
+const posts = sortPosts(
+  await getCollection("blog", ({ data }) => data.isDraft !== true),
+);
 
-const title = "blog ⁖ lutefd"
+const title = "blog ⁖ lutefd";
 ---
 
-
 <Base {title} description="Idk yet">
-    <main class="prose md:!w-[43rem]">
-        <h1>Blog</h1>
-        <div class="flex flex-col gap-12 pt-8">
-            {posts.map((post) => (
-                <ArticlePreview {post} />
-            ))}
-            {posts.length === 0 && (
-                <p class="text-center md:w-[43rem]">No posts yet.</p>
-            )}
-            
-        </div>
-    </main>
+  <main class="prose md:!w-[43rem]">
+    <h1>Blog</h1>
+    <div class="flex flex-col gap-12 pt-8">
+      {posts.map((post) => <ArticlePreview {post} />)}
+      {
+        posts.length === 0 && (
+          <p class="text-center md:w-[43rem]">No posts yet.</p>
+        )
+      }
+    </div>
+  </main>
 </Base>

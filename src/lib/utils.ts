@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import type { CollectionEntry } from 'astro:content';
+import { z } from "zod";
+import type { CollectionEntry } from "astro:content";
 export const ownerSchema = z.object({
   login: z.string(),
   id: z.number(),
@@ -106,26 +106,26 @@ export const projectSchema = z.object({
 export type FeaturedProject = z.infer<typeof projectSchema>;
 
 export async function getFeaturedProjects(
-  number: 1 | 2 | 3 | 4 | 5 | 6
+  number: 1 | 2 | 3 | 4 | 5 | 6,
 ): Promise<FeaturedProject[]> {
   const res = await fetch(
-    'https://api.github.com/users/lutefd/repos?sort=updated'
+    "https://api.github.com/users/lutefd/repos?sort=updated",
   ).then((res) => res.json());
   const projects = projectSchema.array().parse(res);
   return projects.slice(0, number);
 }
 
 export function formatDate(date: Date) {
-  return date.toLocaleDateString('pt-BR', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
+  return date.toLocaleDateString("pt-BR", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
   });
 }
 
 export function sortPosts(
-  posts: CollectionEntry<'blog'>[]
-): CollectionEntry<'blog'>[] {
+  posts: CollectionEntry<"blog">[],
+): CollectionEntry<"blog">[] {
   return posts.sort((a, b) => {
     return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
   });

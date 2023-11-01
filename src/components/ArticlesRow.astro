@@ -1,24 +1,21 @@
 ---
-import type {CollectionEntry} from 'astro:content'
-import Link from '@/components/Link'
-import { formatDate } from '@/lib/utils'
+import type { CollectionEntry } from "astro:content";
+import Link from "@/components/Link";
+import { formatDate } from "@/lib/utils";
 type Props = {
-    post: CollectionEntry<"blog">
-}
+  post: CollectionEntry<"blog">;
+};
 const {
-    post: {
-    data:{
-        title, date
-    },
-    slug
-}
-} = Astro.props
+  post: {
+    data: { title, date },
+    slug,
+  },
+} = Astro.props;
 ---
 
 <article class="flex justify-between">
-    <Link href={`/blog/${slug}`}>
-        <span>{title}</span>
-    </Link>
-    <span>{formatDate(date)}</span>
+  <Link href={`/blog/${slug}`}>
+    <span>{title}</span>
+  </Link>
+  <span>{formatDate(date)}</span>
 </article>
-
