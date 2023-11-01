@@ -4,11 +4,12 @@ import '@fontsource-variable/jetbrains-mono';
 import Link from '@/components/Link'
 type Props = {
     title: string
+    formattedTitle?: string
     description: string
     image?: string
 }
 const {pathname} = Astro.url
-const { title, description, image} = Astro.props
+const { title, description, image, formattedTitle} = Astro.props
 
 let href = 'instanciated'
 
@@ -29,7 +30,7 @@ else {
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="/favicon.ico" />
         <meta name="generator" content={Astro.generator} />
-        <title>{title}</title>
+        <title>{formattedTitle? formattedTitle :title }</title>
         <meta name="title" content={title} />
         <meta name="description" content={description} />
         

@@ -20,13 +20,14 @@ type Props = {
     post: CollectionEntry<"blog">
 }
 
-const {post, post:{ data: {title, description, date, isDraft }}} = Astro.props
+const {post, post:{ data: {title, description, formattedTitle, date, isDraft }}} = Astro.props
+
 
 const { Content } = await post.render()
 
 ---
 
-<Base {title} description={description}>
+<Base {formattedTitle} {title} description={description}>
     <div class="prose tracking-wide">
         {isDraft && (
             <blockquote class="my-8 bg-neutral-800 py-4 pl-4" role="alert">This post is only a <strong>draft</strong> if I sent you this please don't share it and give me your feedback! Thanks</blockquote>
