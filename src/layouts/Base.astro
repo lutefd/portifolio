@@ -40,9 +40,6 @@ else {
         <meta property="og:description" content={description} />
         {image && <meta property="og:image" content={image} />}
 
-        <link as="font" rel="preload" href="/fonts/Geist/GeistVF.ttf" type="font/ttf" crossorigin="anonymous" />
-        <link as="font" rel="preload" href="/fonts/Geist.Mono/Geist Mono/GeistMonoVF.ttf" type="font/ttf" crossorigin="anonymous" />
-    
     </head>
 
     <body class="min-h-screen max-w-[43rem] md:w-[43rem] mx-auto flex flex-col">
@@ -79,8 +76,6 @@ else {
         }
     })()
     function setTheme(theme){
-    console.log(' function running')
-
         if (theme === 'light'){
             document.documentElement.classList.remove('dark')
         }
