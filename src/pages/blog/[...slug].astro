@@ -1,0 +1,39 @@
+---
+import '@/styles/globals.css'
+
+import type {CollectionEntry} from 'astro:content'
+import { getCollection } from 'astro:content'
+import Base from '@/layouts/Base.astro'
+import { formatDate } from '@/lib/utils'
+
+export async function getStaticPaths(){
+    const posts = await getCollection('blog')
+    return posts.map((post) => ({
+        params: {
+            slug: post.slug
+        },
+        props: {post}
+    }))
+}
+
+type Props = {
+    post: CollectionEntry<"blog">
+}
+
+const {post, post:{ data: {title, description, date, isDraft }}} = Astro.props
+
+const { Content } = await post.render()
+
+---
+
+<Base {title} description={description}>
+    <div class="prose tracking-wide">
+        {isDraft && (
+            <blockquote class="my-8 bg-neutral-800 py-4 pl-4" role="alert">This post is only a <strong>draft</strong> if I sent you this please don't share it and give me your feedback! Thanks</blockquote>
+        )}
+        <h1 class="mt-8">
+            {title}
+        </h1>
+        <Content />
+    </div>
+</Base>
