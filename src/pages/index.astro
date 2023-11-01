@@ -1,17 +1,52 @@
 ---
 import '@/styles/globals.css'
-
+import {getFeaturedProjects, sortPosts} from '@/lib/utils'
+import Link from '@/components/Link'
+import Base from '@/layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import ArticlesRow from '@/components/ArticlesRow.astro';
+const projects = await getFeaturedProjects(6);
+const title = "home ⁖ lutefd"
+const posts = sortPosts(await getCollection("blog", ({data})=> data.isDraft !==true )).slice(0,4)
 ---
+<Base {title} description="Luis Dourado's personal website and blog">
+  <a href="https://github.com/lutefd" target="_blank" slot="header-content" class="text-primary/40 text-2xl font-light group-hover:text-primary transition-colors duration-700">lutefd</a>
+  <main class=" pb-12">
+    <p class="text-primary max-w-prose border-b-[0.5px] border-zinc-500 text-lg pb-6 ">
+      <small>
+        Hi, I'm Lutefd aka Luis Dourado , a software engineer from Brazil. I'm currently working at <a href="https://www.sensedia.com/">Sensedia</a> as a full-stack developer. I mainly work with <strong>Typescript</strong>, <strong>Golang</strong> and a number of frontend frameworks, as well as some DevOps tools.
+      </small>
+    </p>
+  </main>
+  <section class="pb-12">
+    <div class="flex flex-col gap-1 pb-10 group">
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1 class="">Astro</h1>
-	</body>
-</html>
+      <h2 class="text-xl text-primary font-semibold ">Projects</h2>
+      <p class="text-xs text-zinc-400/90 group-hover:text-primary transition-colors duration-700">Latest projects I've been working on</p>
+    </div>
+    <div class="grid grid-cols-2 gap-4 md:grid-cols-3 ">
+      {projects.map(project => <div class="flex flex-col w-[21ch] group ">
+        <Link href={project.url}>
+          <span class="font-medium text-center">
+            {project.name}
+            </span> 
+          </Link> 
+          <span class="pt-1 text-xs truncate text-primary/50 group-hover:text-primary">{project.description}</span>
+        </div>)}
+    </div>
+  </section>
+   <section class="">
+    <div class="flex flex-col gap-1 pb-10 group">
+      <h2 class="text-xl text-primary font-semibold ">Blog</h2>
+      <p class="text-xs text-zinc-400/90 group-hover:text-primary transition-colors duration-700">My latest articles </p>
+    </div>
+    <div class="flex flex-col gap-5">
+      {posts.map(post => <ArticlesRow {post} />)}
+      {posts.length === 0 && <p class="text-primary">No posts yet</p>}
+    </div>
+  </section>
+</Base>
+
+<style is:global>
+
+</style>
