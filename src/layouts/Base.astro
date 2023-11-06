@@ -50,43 +50,47 @@ if (pathname === "/blog" || pathname === "/blog/") {
       </header>
       <slot />
     </div>
-  </body><script>
-    import { loglib } from "@loglib/tracker";
-    loglib.record({
-      id: "luisdourado",
-    });
-  </script>
-  <script is:inline>
-    const theme = (() => {
-      if (typeof localStorage !== "undefined" && localStorage.getItem("theme"))
-        return localStorage.getItem("theme");
-      if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: light)").matches
-      ) {
-        return "light";
-      } else {
-        return "dark";
+    <script>
+      import { loglib } from "@loglib/tracker";
+      loglib.record({
+        id: "luisdourado",
+      });
+    </script>
+    <script is:inline>
+      const theme = (() => {
+        if (
+          typeof localStorage !== "undefined" &&
+          localStorage.getItem("theme")
+        )
+          return localStorage.getItem("theme");
+        if (
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: light)").matches
+        ) {
+          return "light";
+        } else {
+          return "dark";
+        }
+      })();
+      function setTheme(theme) {
+        if (theme === "light") {
+          document.documentElement.classList.remove("dark");
+        } else {
+          document.documentElement.classList.add("dark");
+        }
+        if (typeof localStorage !== "undefined")
+          localStorage.setItem("theme", theme);
       }
-    })();
-    function setTheme(theme) {
-      if (theme === "light") {
-        document.documentElement.classList.remove("dark");
-      } else {
-        document.documentElement.classList.add("dark");
+
+      setTheme(theme);
+
+      document.addEventListener("astro:after-swap", () => setTheme(theme));
+    </script>
+
+    <style is:global>
+      body {
+        font-family: "JetBrains Mono", monospace;
       }
-      if (typeof localStorage !== "undefined")
-        localStorage.setItem("theme", theme);
-    }
-
-    setTheme(theme);
-
-    document.addEventListener("astro:after-swap", () => setTheme(theme));
-  </script>
-
-  <style is:global>
-    body {
-      font-family: "JetBrains Mono", monospace;
-    }
-  </style>
+    </style>
+  </body>
 </html>
