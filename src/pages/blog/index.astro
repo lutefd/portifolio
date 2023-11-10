@@ -8,7 +8,6 @@ import Base from "@/layouts/Base.astro";
 const posts = sortPosts(
   await getCollection("blog", ({ data }) => data.isDraft !== true),
 );
-
 const title = "blog ⁖ lutefd";
 ---
 
