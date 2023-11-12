@@ -30,7 +30,7 @@ const {
 const { Content } = await post.render();
 ---
 
-<Base {formattedTitle} {title} description={description}>
+<Base {formattedTitle} {title} description={description} image={`https://og.luisdourado.com/?title=${title}&description=${description}`}>
   <div class="prose tracking-wide">
     {
       isDraft && (
