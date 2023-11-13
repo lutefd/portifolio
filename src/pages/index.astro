@@ -47,7 +47,7 @@ const posts = sortPosts(
     <div class="grid grid-cols-2 gap-5 md:gap-4 md:grid-cols-3">
       {
         projects.map((project) => (
-          <div class="flex flex-col h-auto w-full md:w-[21ch] group ">
+          <div class="flex flex-col h-auto w-full md:w-[21ch] group border-[1px] border-transparent hover:border-primary/20 p-2 rounded-[4px] ">
             <Link href={project.svn_url}>
               <span class="font-medium text-center truncate">
                 {project.name}
