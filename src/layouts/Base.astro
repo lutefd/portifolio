@@ -20,6 +20,14 @@ if (pathname === "/blog" || pathname === "/blog/") {
 } else {
   href = "/";
 }
+let isWork = pathname === "/work" || pathname.startsWith("/work/");
+if (pathname === "/work" || pathname === "/work/") {
+  href = "/";
+} else if (pathname.startsWith("/work/")) {
+  href = "/work";
+} else {
+  href = "/";
+}
 ---
 
 <html lang="en">
@@ -50,7 +58,7 @@ if (pathname === "/blog" || pathname === "/blog/") {
           <Link {href}>← back</Link>
         </slot>
         <nav class="">
-                      <a href="/work" class="text-md hover:underline underline-offset-4">Work</a>
+                      {isWork ? <a href="/" class="text-md hover:underline underline-offset-4">Home</a> :<a href="/work" class="text-md hover:underline underline-offset-4">Work</a>}
           <a href="https://cal.com/lutefd/" target="_blank"  class="text-md whitespace-nowrap hover:underline underline-offset-4">
             Contact</a>
         </nav>
