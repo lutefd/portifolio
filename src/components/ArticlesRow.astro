@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import Link from "@/components/Link";
 import { formatDate } from "@/lib/utils";
 type Props = {
-  post: CollectionEntry<"blog">;
+  post: CollectionEntry<"blog"> | CollectionEntry<"work-blog">;
 };
 const {
   post: {
