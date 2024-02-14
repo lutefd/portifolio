@@ -1,0 +1,70 @@
+---
+title: 'Access Token Management'
+description: 'Learn how we built a multitenant system to manage access tokens for our customers.'
+date: 'May 4, 2023'
+formattedTitle: 'Access Token Management ⁖ lutefd'
+isDraft: true
+---
+
+Sensedia is a company that provides API management solutions. Our customers use our platform to manage their APIs, and expose them to their partners and customers. We have a multitenant system, where each customer has its own environment, and we need to manage access tokens for each of them. In this article, I will explain how we built a system to manage access tokens for our customers.
+
+## The problem
+
+As our customers expose their APIs to their partners and customers, they need to provide access tokens to them. We need to manage these access tokens, and we need to do it in a secure way. Our support team handle hundreds of different customers, and we need to make sure that we don't mix up access tokens from different customers, that the speed where we can create and revoke access tokens is fast, and that we can scale this system as our customer base grows.
+
+When I joined Sensedia this was done in a very manual way. Our support team would create access tokens for our customers using our API via Postman, and then they would send the access tokens to whom requested it, keeping track of it in excel sheets. This was a very slow process, and it was also error-prone. We needed to automate this process, but given that the partners of our customers needed to first request access to the APIS, and then our customers needed to approve these requests, it wasn't so simple as to just create them on request and record it on a Database.
+
+## The solution
+
+We couldn't completely automate the process, but we could make it much faster and less error-prone.
+
+Transitioning away from the laborious manual process, we opted for a semi-automated approach to streamline token management. While retaining the essence of token request initiation by partners and subsequent client approval, we augmented the process with cutting-edge automation capabilities.
+
+At the heart of our solution lies a centralized token management platform, meticulously designed to cater to the distinct needs of each customer within our multitenant system. This platform serves as a unified hub, housing individual customer environments and facilitating seamless token creation, retrieval, and revocation.
+
+### The structure
+
+Our system is composed of three main components: the frontend, the backend broker and the gateway.
+
+-   The **frontend** is a single page application that allows our support team to manage access tokens for our customers. It allows the support team to switch between customers, and to create and revoke access tokens for each of them. The decision to make it a single page application was due to budget and time constraints, as we had to deliver the first version of the system in a very short time, and the team was already familiar with React + Vite. This wasn't the best choice, but for the time being it was the best we could do.
+
+-   The **backend broker** is a service that manages the access tokens for each customer. It is a multitenant system, and it allows us to create and revoke access tokens for each customer in a secure and isolated manner. It also allows us to scale the system as our customer base grows, as we can simply add new environments for new customers. This service is built using Python with Django and it is hosted on AWS.
+
+-   The **gateway** is the service that our customers use to manage their APIs. It's Sensedia main product, it enables organizations to manage, secure, and monitor their APIs in a centralized way.
+
+### Multitenant architecture
+
+Our multitenant architecture is the backbone of our token management system. It allows us to create and manage access tokens for each customer in a secure and isolated manner. Each customer has its own environment, which has access only to their gateways, and we can manage access tokens for each of them independently.
+
+This approach ensures that the support team can create and revoke access tokens for each customer without the risk of mixing them up. It also allows us to scale the system as our customer base grows, as we can simply add new environments for new customers.
+
+#### Challenges
+
+Building a multitenant system is not without its challenges. We had to carefully design our system to ensure that each customer's data is isolated. As the sysetem frontend is a single page application, we had to make sure that the frontend code is secure and that it doesn't allow access to other customers' data. As not every member of the support team should have access to all customers' data, we had to implement role-based access control to ensure that only authorized users can access each customer's data, and that they can only perform the actions they are allowed to.
+
+One of the most challenging aspects of this was making the visual representation of each customer's environment in the frontend. We had to make sure the support team could easily switch between customers, and that they could easily identify which customer they were working with.
+We also had to make sure that the system was responsive, and that it could handle a large number of customers without becoming slow.
+
+#### Solutions
+
+To address these challenges, we created a section in the navbar that allows the support team to easily switch between customers. We also used color codingand the clients logo to make it easy to identify which customer they were working with. We also made the system responsive, and we implemented a number of performance optimizations to ensure that it could handle a large number of customers without becoming slow.
+
+To handle the state of the application between multiple tabs, we used local storage to store the state of the application, and we implemented a number of measures to ensure that the state is consistent across multiple tabs. Ensuring on each request to the brokering service that the user is in the correct environment.
+
+### Access Token lifecycle
+
+We designed the access token lifecycle to be as simple and secure as possible. When a partner requests access to an API, the customer's admin receives a notification and can approve or deny the request. If the request is approved, the support team can create an access token for the partner, and send it to them. If the request is denied, the partner is notified and the request is removed from the system.
+
+The access token is then stored in the backend broker, and the partner can use it to access the customer's APIs. The access token has an expiration date, and it is automatically revoked when it expires. The support team can also revoke the access token at any time.
+
+## Conclusion
+
+Our token management system has been a game-changer for our support team. It has significantly reduced the time it takes to create and revoke access tokens for our customers, and it has also reduced the risk of errors. However, there are a few points to consider when building a similar system:
+
+-   **Security**: Security is paramount when managing access tokens. We had to ensure that our system is secure and that it doesn't allow unauthorized access to our customers' data. We implemented a number of security measures, such as role-based access control, to ensure that only authorized users can access each customer's data.
+
+-   **Scalability**: Our system is built to scale as our customer base grows. We can simply add new environments for new customers, and our system can handle a large number of customers without becoming slow. However, we had to carefully design our system to ensure that it can handle a large number of customers without becoming slow.
+
+-   **User experience**: We had to ensure that our system is easy to use and that it provides a good user experience. We implemented a number of features, such as color coding and the clients logo, to make it easy to identify which customer the support team is working with. We also made the system responsive, and we implemented a number of performance optimizations to ensure that it provides a good user experience.
+
+If we had more time and budget, we would have built a more robust frontend with Next.js or SvelteKit, and we would have implemented a number of additional features to further improve the user experience. However, given the constraints we had, we believe that we have built a system that meets our needs and that provides a good user experience.
