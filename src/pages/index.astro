@@ -1,11 +1,12 @@
 ---
 import "@/styles/globals.css";
-import { getFeaturedProjects, sortPosts } from "@/lib/utils";
+import { sortPosts } from "@/lib/utils";
 import Link from "@/components/Link";
+import ProjectCard from "@/components/project-card";
 import Base from "@/layouts/Base.astro";
 import { getCollection } from "astro:content";
 import ArticlesRow from "@/components/ArticlesRow.astro";
-const projects = await getFeaturedProjects(6);
+import projects from "data/projects.json";
 const title = "home ⁖ lutefd";
 const posts = sortPosts(
   await getCollection("blog", ({ data }) => data.isDraft !== true),
@@ -13,31 +14,34 @@ const posts = sortPosts(
 ---
 
 <Base {title} description="Luis Dourado's personal website and blog" image={`https://og.luisdourado.com/?title=lutefd&description=Luis Dourado's personal website and blog`}>
+  
   <a
     href="https://github.com/lutefd"
     target="_blank"
     slot="header-content"
-    class="text-primary/40 text-2xl font-light group-hover:text-primary transition-colors duration-700"
+    class="text-primary/90 text-2xl font-light group-hover:text-primary transition-colors duration-700"
     >lutefd</a
   >
-  <main class="pb-8 md:pb-12">
+  <main class="pb-4 md:pb-6">
+    <h1 class="text-xl md:text-2xl font-semibold text-primary mt-0 mb-2">
+      Hi, I'm Luis
+    </h1>
     <p
-      class="text-primary max-w-prose border-b-[0.5px] border-zinc-500 text-lg pb-6"
+      class="text-primary max-w-prose border-b-[0.5px] border-zinc-500 text-lg pb-4"
     >
       <small>
-        Hi, I'm Lutefd aka Luis Dourado , a software engineer from Brazil. I'm
+        Also known as Lutefd, a software engineer from Brazil. I'm
         currently working at <Link href="https://www.sensedia.com/">
-          Sensedia
-        </Link> as a full-stack developer. I mainly work with <strong
+          Sensedia</Link> as a full-stack developer. I mainly work with <strong
           >Typescript</strong
         >, <strong>Golang</strong> and a number of frontend frameworks, as well
         as some DevOps tools.
       </small>
     </p>
   </main>
-  <section class="pb-8 md:pb-12">
-    <div class="flex flex-col pb-10 group">
-      <h2 class="text-xl text-primary font-semibold mb-2">Projects</h2>
+  <section class="pb-4 md:pb-6">
+    <div class="flex flex-col pb-4 group">
+      <h2 class="text-xl text-primary font-semibold mt-0 mb-2">Projects</h2>
       <p
         class="text-xs text-zinc-400/90 group-hover:text-primary transition-colors duration-700"
       >
@@ -47,23 +51,14 @@ const posts = sortPosts(
     <div class="grid grid-cols-2 gap-5 md:gap-4 md:grid-cols-3">
       {
         projects.map((project) => (
-          <div class="flex flex-col h-auto w-full md:w-[21ch] group border-[1px] border-transparent hover:border-primary/20 p-2 rounded-[4px] ">
-            <Link href={project.svn_url}>
-              <span class="font-medium text-center truncate">
-                {project.name}
-              </span>
-            </Link>
-            <span class="pt-1 text-xs truncate text-primary/50 group-hover:text-primary">
-              {project.description}
-            </span>
-          </div>
+         <ProjectCard {project} client:visible />
         ))
       }
     </div>
   </section>
-  <section class="pb-10">
-    <div class="flex flex-col pb-6 md:pb-10 group">
-      <h2 class="text-xl text-primary font-semibold mb-2">Blog</h2>
+  <section class="pb-4">
+    <div class="flex flex-col pb-4 group">
+      <h2 class="text-xl text-primary font-semibold mt-0 mb-2">Blog</h2>
       <p
         class="text-xs text-zinc-400/90 group-hover:text-primary transition-colors duration-700"
       >
