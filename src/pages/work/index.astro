@@ -1,0 +1,70 @@
+---
+import "@/styles/globals.css";
+import Link from "@/components/Link";
+import Base from "@/layouts/Base.astro";
+
+const title = "work ⁖ lutefd";
+---
+
+<Base {title} description="My work experience and projects " image={`https://og.luisdourado.com/?title=Work&description=Work%20Section`}>
+  <main class="pb-4 md:pb-6 prose max-w-4xl">
+    <h1 class="text-xl md:text-2xl font-semibold text-primary mt-0 mb-2">
+      My work
+    </h1>
+    <p
+      class="text-primary max-w-prose border-b-[0.5px] border-zinc-500 text-lg pb-4"
+    >
+      <small>
+        While exploring the world of software development, design, and other things. I've found my passion in creating software that people love to use. Here is the rundown of my work until now.
+        <br/>
+        <span class="text-xs text-muted-foreground">You can check more about each project by reading their respective blog posts.
+</span>
+      </small>
+    </p>
+  <div class="flex flex-col gap-6 max-w-4xl">
+    <div class=" flex flex-col  border-b-[0.5px] border-zinc-500 pb-4">
+      <h2 class="text-lg md:text-xl font-semibold text-primary mt-0 mb-1">Sensedia</h2>
+      <p class="text-muted-foreground text-xs">Software engineer</p>
+      <p class="text-primary max-w-prose mt-0 text-lg">
+        <small>
+          I joined Sensedia in early 2023 to build the next generation of Developer Experience tools for the API Economy. I'm part of the team that is building the Sensedia Developer Portal, a platform that allows developers to discover, learn, and test APIs from our customers.
+          <ul class="mt-0 text-md max-w-prose mb-0">
+            <li>
+              <a class="text-primary no-underline hover:underline hover:underline-offset-4 hover:cursor-pointer" href="/work/test">
+                As soon as I joined the team, I was responsible for the development of an internal tool that allows the Support team to manage and create access tokens for the customers of the Developer Portal. This was a critical tool for the team, and I was able to deliver it in a short period of time. The tool was a multi tenant application, and it was built using React with Vite.
+              </a>
+            
+            </li>
+            <li>
+              <a class="text-primary no-underline hover:underline hover:underline-offset-4 hover:cursor-pointer" href="/work/test">
+               Shortly after, I was promoted and became responsible for the development of the Sensedia Custom Developer Portal. The product needed to be built from scratch as it was being migrated from <strong>Drupal to Next.js</strong>, and I was responsible for the architecture and the development of the platform. I was able to deliver the first version of the product in a short period of time, and it was a success. The product was built using Nextjs and Golang.
+              </a>
+            </li>
+            <li>
+              <a class="text-primary no-underline hover:underline hover:underline-offset-4 hover:cursor-pointer" href="/work/test">
+               After the initial success of the Sensedia Custom Developer Portal, I led the development of its next version. This release includes a bespoke CMS, custom authentication, and authorization kit, along with integrated form builder functionality.
+              </a>
+            </li>
+          </ul>
+        </small>
+      </p>
+    </div>
+    <div class=" flex flex-col  border-b-[0.5px] border-zinc-500 pb-4">
+      <h2 class="text-lg md:text-xl font-semibold text-primary mt-0 mb-1">Flyon</h2>
+      <p class="text-muted-foreground text-xs">Software engineer</p>
+      <p class="text-primary max-w-prose mt-0 text-lg">
+        <small>
+          Flyon is a marketing startup that helps companies to create and manage their marketing campaigns. I joined the team in 2022 to help them build their platform and their customers applications. I experimented with a variety of technologies, tools and processes, hopping between the frontend and backend, and even dipping my toes into the world of DevOps.
+          <br/>
+          <br/>
+
+          On the frontend I was responsible for the migration from a legacy php application to a modern Nextjs application. As well as introduced Astro for the landing pages and marketing pages. I dealt with a lot of performance issues and was able to improve the overall performance of the applications.
+          <br/>
+          <br/>
+          Throughout my time at Flyon, I was also responsible for managing the infrastructure of the applications. I was able to improve the overall delivery experience by introducing a new CI/CD pipeline and a new infrastructure using Terraform and AWS. Also managed a migration from Hostgator to Cloudflare and AWS.
+        </small>
+      </p>
+    </div>
+  </div>
+  </main>
+</Base>
