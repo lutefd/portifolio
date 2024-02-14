@@ -40,14 +40,14 @@ This approach ensures that the support team can create and revoke access tokens 
 
 #### Challenges
 
-Building a multitenant system is not without its challenges. We had to carefully design our system to ensure that each customer's data is isolated. As the sysetem frontend is a single page application, we had to make sure that the frontend code is secure and that it doesn't allow access to other customers' data. As not every member of the support team should have access to all customers' data, we had to implement role-based access control to ensure that only authorized users can access each customer's data, and that they can only perform the actions they are allowed to.
+Building a multitenant system is not without its challenges. We had to carefully design our system to ensure that each customer's data is isolated. As the system frontend is a single page application, we had to make sure that the frontend code is secure and that it doesn't allow access to other customers' data. As not every member of the support team should have access to all customers' data, we had to implement role-based access control to ensure that only authorized users can access each customer's data, and that they can only perform the actions they are allowed to.
 
 One of the most challenging aspects of this was making the visual representation of each customer's environment in the frontend. We had to make sure the support team could easily switch between customers, and that they could easily identify which customer they were working with.
 We also had to make sure that the system was responsive, and that it could handle a large number of customers without becoming slow.
 
 #### Solutions
 
-To address these challenges, we created a section in the navbar that allows the support team to easily switch between customers. We also used color codingand the clients logo to make it easy to identify which customer they were working with. We also made the system responsive, and we implemented a number of performance optimizations to ensure that it could handle a large number of customers without becoming slow.
+To address these challenges, we created a section in the navbar that allows the support team to easily switch between customers. We also used color coding and the clients logo to make it easy to identify which customer they were working with. We also made the system responsive, and we implemented a number of performance optimizations to ensure that it could handle a large number of customers without becoming slow.
 
 To handle the state of the application between multiple tabs, we used local storage to store the state of the application, and we implemented a number of measures to ensure that the state is consistent across multiple tabs. Ensuring on each request to the brokering service that the user is in the correct environment.
 
