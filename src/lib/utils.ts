@@ -15,8 +15,8 @@ export function formatDate(date: Date) {
 }
 
 export function sortPosts(
-	posts: CollectionEntry<'blog'>[]
-): CollectionEntry<'blog'>[] {
+	posts: CollectionEntry<'blog'>[] | CollectionEntry<'work-blog'>[]
+): CollectionEntry<'blog'>[] | CollectionEntry<'work-blog'>[] {
 	return posts.sort((a, b) => {
 		return (
 			new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
