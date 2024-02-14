@@ -160,7 +160,7 @@ First of all, we had to change our approach:
 
 -   Strapi was not a good fit for our use case, their querying was not great and the way they handle relationships was not great, I often had to do a lot of workarounds to make it work. We should build our own CMS that we had more control over and with the features that would suit our needs.
 
--   The Golang backend was pretty great, but we were not using it to its full potential. Delegate most of the processing work for it and have a server side caching layer with Redis for it.
+-   The Golang backend was pretty great, but we were not using it to its full potential. We need to delegate most of the processing work to it and have a server side caching layer with Redis for the huge chunks that come back from the API Gateway Manager.
 
 -   The frontend had to change as well, the first thing we had to have were two different versions of the product, one for light customers and one for heavy customers. The light customers would have a static version of the portal with no fancy features like streaming and loads of data on the homepage, and the heavy customers would have the full version of the portal. The first one would be deployed with Open-Next/SST and the second one would be deployed on EC2.
 
