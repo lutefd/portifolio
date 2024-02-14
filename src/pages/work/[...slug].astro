@@ -1,0 +1,52 @@
+---
+import "@/styles/globals.css";
+
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import Base from "@/layouts/Base.astro";
+import { formatDate } from "@/lib/utils";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("work-blog");
+  return posts.map((post) => ({
+    params: {
+      slug: post.slug,
+    },
+    props: { post },
+  }));
+}
+
+type Props = {
+  post: CollectionEntry<"work-blog">;
+};
+
+const {
+  post,
+  post: {
+    data: { title, description, formattedTitle, date, isDraft },
+  },
+} = Astro.props;
+const dateFormatted = formatDate(date);
+
+const { Content } = await post.render();
+---
+
+<Base {formattedTitle} {title} description={description} image={`https://og.luisdourado.com/?title=${title}&description=${description}`}>
+  <div class="prose prose-slate tracking-tight max-w-4xl pb-10">
+    {
+      isDraft && (
+        <blockquote class="my-8 bg-foreground text-primary-foreground py-4 px-4 text-base" role="alert">
+          This post is only a <strong>draft</strong>. if I sent you this, please
+          don't share it and send your feedback!
+        </blockquote>
+      )
+    }
+    <div class="flex flex-col">
+      <h1 class="mb-2 capitalize">
+        {title}
+      </h1>
+      <p class="text-xs text-muted-foreground mt-0 mb-0">{dateFormatted}</p>
+    </div>
+    <Content />
+  </div>
+</Base>
