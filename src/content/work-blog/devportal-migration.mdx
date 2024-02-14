@@ -131,7 +131,7 @@ As the development went on, I started to notice a few things:
 
 -   The most valuable thing that RSC would bring to the table was the ability to stream the page, and it was not stable. It was not stable at all, and it was a pain to debug. Often the connection would just hang for the timeout limit, which gave me a lot of headaches and lambdas frequently running for 1 minute, which is something you don't want to happen. So I couldn't use it, and ended up only using RSC as a data layer, which was a shame, its potential is huge.
 
--   The prefetch was so agressive it would often cost a lot of money. The default behaviour at that time was to prefetch all the links on the page, that include tables with hundreds of items and the like. At the time I'm writing this, the default behaviour now it's null, it's kind of funny that a boolean value defaults to null, but it's a good change. The docs say that this default amounts to this:
+-   The prefetch was so agressive it would often cost a lot of money. The default behaviour at that time was to prefetch all the links on the page, that include tables with hundreds of items and the like. At the time I'm writing this, the default behaviour now is null, it's kind of funny that a boolean value defaults to null, but it's a good change. The docs say that this default amounts to this:
 
     > Prefetch behavior depends on whether the route is static or dynamic. For static routes, the full route will be prefetched (including all its data). For dynamic routes, the partial route down to the nearest segment with a loading.js boundary will be prefetched.
 
