@@ -43,12 +43,17 @@ if (pathname === "/blog" || pathname === "/blog/") {
     
   </head>
 
-  <body class="min-h-screen max-w-[43rem] md:w-[43rem] mx-auto flex flex-col">
+  <body class="min-h-screen max-w-4xl w-full mx-auto flex flex-col">
     <div class="md:mx-auto px-4">
-      <header class="h-10 flex items-center py-10 justify-between group">
+      <header class="h-10 flex items-center pt-10 pb-10 justify-between group">
         <slot name="header-content">
           <Link {href}>← back</Link>
         </slot>
+        <nav class="">
+                      <a href="/work" class="text-md hover:underline underline-offset-4">Work</a>
+          <a href="https://cal.com/lutefd/" target="_blank"  class="text-md whitespace-nowrap hover:underline underline-offset-4">
+            Contact</a>
+        </nav>
       </header>
       <slot />
     </div>
@@ -59,34 +64,21 @@ if (pathname === "/blog" || pathname === "/blog/") {
       });
     </script>
     <script is:inline>
-      const theme = (() => {
-        if (
-          typeof localStorage !== "undefined" &&
-          localStorage.getItem("theme")
-        )
-          return localStorage.getItem("theme");
-        if (
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: light)").matches
-        ) {
-          return "light";
-        } else {
-          return "dark";
-        }
-      })();
-      function setTheme(theme) {
-        if (theme === "light") {
-          document.documentElement.classList.remove("dark");
-        } else {
-          document.documentElement.classList.add("dark");
-        }
-        if (typeof localStorage !== "undefined")
-          localStorage.setItem("theme", theme);
-      }
+     const theme = "light";
 
-      setTheme(theme);
+  function setTheme(theme) {
+    if (theme === "light") {
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
+    }
+    if (typeof localStorage !== "undefined")
+      localStorage.setItem("theme", theme);
+  }
 
-      document.addEventListener("astro:after-swap", () => setTheme(theme));
+  setTheme(theme);
+
+  document.addEventListener("astro:after-swap", () => setTheme(theme));
     </script>
 
     <style is:global>
