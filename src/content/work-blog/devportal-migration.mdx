@@ -124,7 +124,7 @@ I spent a lot of time staring at the AWS cost monitor, fiddling with the code an
 
 I was able to deliver the portal to homologation in time, and it was a success. My team leader was happy, the customer was happy but I wasn't as happy as I should've been.
 
-The perfomance simply wasn't where I wanted, as the Golang backend had to send a 9MB JSON to the homepage because of a feature the customer requested, which is already an average of 4s on the wire, and the page would take sometimes 10s to render on a cold start.
+The perfomance simply wasn't where I wanted, as the Golang backend had to send a 9MB JSON to the homepage because of a feature the customer requested, which is already an average of 4s on the wire, and the page would sometimes take 10s to render on a cold start.
 The costs were not what I was expecting, for the volume of requests we had, an EC2 instance would be cheaper.
 
 The DX was not there, the revalidation issues were a pain, the streaming was not stable, the prefetch was costing a lot of money.
