@@ -114,7 +114,7 @@ As the development went on, I started to notice a few things:
 
     > Prefetch behavior depends on whether the route is static or dynamic. For static routes, the full route will be prefetched (including all its data). For dynamic routes, the partial route down to the nearest segment with a loading.js boundary will be prefetched.
 
-You still need to set it to _false_ to disable it, and it's not clear what the default behaviour is, but it's better than the previous one.
+    You still need to set it to _false_ to disable it, and it's not clear what the default behaviour is, but it's better than the previous one.
 
 -   When server actions became stable, I was able to use it, and it was great. But it came with their own set of problems, the biggest one being the connection limit with the database. As AWS don't just spins a ton of lambdas in burst scenarios, they just create a ton of connections to the database, breaking the connection limit in a matter of seconds. So we had to migrate to Aurora Serverless just because of RDS Data API. We're evaluating other options, but databases seem like a massive hurdle when using serverless.
 
