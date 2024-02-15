@@ -62,7 +62,7 @@ I chose a customer with a small developer portal to be the first to migrate. Wit
 
 Integrating it with Strapi was a breeze, and I was able to build feature by feature the core of the portal.
 
-Sure, I might had scratched my head a bit with Next.js default caching behaviour and screamed at revalidation for a bit but it was all good. So good in fact, that I decided a tweet won't do it justice. No, I had to write a **presentation** about it.
+Sure, I might had scratched my head a bit with Next.js default caching behaviour and screamed at revalidation for a bit but it was all good. So good in fact, that I decided a tweet wouldn't do it justice. No, I had to write a **presentation** about it.
 
 ## The presentation
 
@@ -73,15 +73,17 @@ I wanted to share my experience with the team, and I wanted to show them how gre
 
 This were on similar priced environments, the difference was just absurd.
 
+[Here](https://docs.google.com/presentation/d/1quosQQYQip9G31VwvaW0tP00N_DrXZ6yZwTxvlON3yw/edit?usp=sharing) is the full presentation if you're interested, it's in portuguese, but you can get the gist of it.
+
 ## The struggle
 
-Starting off this project would be a pilot, if it all went well we would migrate other customers and the new stack would be the default in the future. But it had some constraints:
+Starting off, this project would be a pilot, if it all went well we would migrate other customers and the new stack would be the default in the future. But it had some constraints:
 
--   As a pilot, we would have to keep the current Drupal 7 portals running, so most of the team would have to work on them. I would be the only developer working on the new stack along with another developer that would give me a hand with the backend broker integration.
+-   As a pilot, we would have to keep the current Drupal 7 portals running, so most of the team would have continue working on them. I would be the only developer working on the new stack with occasional help from another developer that would give me a hand with the backend broker integration.
 
 -   I had 1.5 months to deliver the new portal to homologation, and it had to have all the features the current portal had.
 
--   The customer had a few custom solutions built on top of Drupal, and we would have to rebuild them in the new stack. Had to integrate the authentication with their LDAP and things of the such.
+-   The customer had a few custom solutions built on top of Drupal, and we would have to rebuild them in the new stack. I also had to integrate the authentication with their LDAP among other things.
 
 The initial development was smooth, I reutilized a lot of the code I had built on the mock migration and I was able to build the core of the portal in a couple of weeks.
 
@@ -92,7 +94,7 @@ A few things to note here:
 
 I had to build a preview environment for the new portal, and I had to do it on AWS. Amplify was basically a no-go, despite being the AWS way to deploy a Next.js app, it didn't support the features I needed, it had a lot of bugs, the documentation was not great and the overcharge on lambda and the build times were absurd.
 
-Deploying it on a EC2 instance was also a no-go at that time, the way my naive self sold the new stack to the team was by selling the idea of serverless along with it. I didn't want to go back on my word on my first opportunity to lead a project.
+Deploying it on a EC2 instance was also a no-go at that time, the way the new stack was sold to the team was by selling the idea of serverless along with it. This was the time to experiment with serverless, and I was eager to do so. As I knew that Next.js was designed to work with serverless, I thought this was the best way to go.
 
 Searching around for a solution I found out about [SST](https://sst.dev/) and [Open-Next](https://open-next.js.org/), it seemed like a great solution. It still had some rough edges, mainly because of the weird behaviour Next.js has, the black magic Vercel does when deploying a Next.js app and the AWS Lambda limitations, but it would make do.
 
