@@ -1,6 +1,6 @@
 ---
 title: 'Migrating a Product from Drupal to Next.js'
-description: "How I migrated Sensedia's Developer Portal Product from Drupal to Nextjs"
+description: "How I migrated Sensedia's Developer Portal Product from Drupal to Next.js"
 date: 'Feb 14, 2023'
 formattedTitle: 'Migrating a Product from Drupal to Next.js ⁖ lutefd'
 isDraft: false
@@ -12,7 +12,7 @@ Exploring the migration of a decade-old legacy product from Drupal to Next.js wa
 
 ## Why Migrate?
 
-Drupal is a powerful CMS, but it's not the best tool for every job. Sensedia's Developer Portal was built on Drupal 7, and it was showing its age. The site was slow, and the development process was painful. The team hated working with it, building custom solutions was a pain, we felt too constrained by the platform, and we had to deal with a **lot** of legacy code. Being fair with Drupal, the developer portals were built with the same template and strucuture since 2011, and it was a different world back then. They did a great job of keeping the site up and running for so long, and with so little resources, each website was hosted in a pod with 256MB of RAM.
+Drupal is a powerful CMS, but it's not the best tool for every job. Sensedia's Developer Portal was built on Drupal 7, and it was showing its age. The site was slow, and the development process was painful. The team hated working with it, building custom solutions was a pain, we felt too constrained by the platform, and we had to deal with a **lot** of legacy code. Being fair with Drupal, the developer portals were built with the same template and structure since 2011, and it was a different world back then. They did a great job of keeping the site up and running for so long, and with so little resources, each website was hosted in a pod with 256MB of RAM.
 
 We wanted to improve the developer experience and make the developer portals faster and have a better user experience.
 
@@ -22,14 +22,14 @@ The team grouped up and started to discuss the best approach to migrate the prod
 
 1. **Drupal 10**: We could upgrade the current Drupal 7 to the latest version. This would be the easiest path, but it would not solve the problems we had with the platform. The moment we started to build custom solutions, we would be back to the same problems we had before.
 2. **Headless Drupal**: We could keep Drupal as the CMS and build a new frontend with a modern stack. This would be a good option, we even looked into it, but nobody wanted to work with Drupal anymore. We wanted to move on.
-3. **Next.js**: We could build the new frontend with Next.js and use a headless CMS. This was the most exciting option. We could build a modern frontend, use a modern stack, and have the flexibility to build custom solutions. We could use the latest technologies and best practices. We could build a better developer experience.
-4. **SvelteKit**: Altough I simply love Svelte and SvelteKit, it was not an option at the time. Our customers were not ready for it, and we didn't have the time to educate them about it.
+3. **Next.js**: We could build the new frontend with Next.js and use a headless CMS. This was the most exciting option. We could build a modern frontend, use a modern stack, and have the flexibility to build custom solutions. We could use the latest technologies and best practices. Not only that, but we could build a better developer experience.
+4. **SvelteKit**: Although I simply love Svelte and SvelteKit, it was not an option at the time. Our customers were not ready for it, and we didn't have the time to educate them about it.
 
 We decided to go with Next.js. It was the most exciting option, and it would allow us to build a modern frontend with a modern stack.
 
 ### Why Next.js?
 
-Next.js is a great framework for building modern web applications. It's built on top of React, and it has a lot of features that make it easy to build fast, scalable, and maintainable web applications. It has a great developer experience, and it's easy to deploy and monitor — on paper it was the perfect fit for our needs.
+Next.js is a great framework for building modern web applications. It's built on top of React, and it has a lot of features that make it easy to build fast, scalable, and maintainable web applications. It has a great developer experience, and it's easy to deploy and monitor — on paper, it was the perfect fit for our needs.
 We got into Next.js a little bit before React Server Components (RSC) were stable, but we went with it anyway. The DX was great, and made it easier to really use Next.js, we saw a lot of potential in it. We were also excited about the idea of using a headless CMS, and we were looking into a few options. I'll skip the part where we decided to use Strapi, and jump to the whole project stack.
 
 ### The Structure of the New Stack
@@ -56,13 +56,13 @@ After a couple of weeks of research and planning, I started to build the new fro
 	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </Centralizer>
 
-The caching was amazing, having HMR was the best — with drupal you had to code blindly and only after saving the whole block you could have some visual feedback — the DX was amazing, the performance was amazing, the flexibility was amazing, the possibilities were amazing. I so happy with the results that I decided to start building the new frontend right away.
+The caching was amazing, having HMR was the best — with drupal you had to code blindly and only after saving the whole block you could have some visual feedback — the DX was amazing, the performance was amazing, the flexibility was amazing, the possibilities were amazing. I was so happy with the results that I decided to start building the new frontend right away.
 
 I chose a customer with a small developer portal to be the first to migrate. With a small portal, I could test the waters and learn from my mistakes. I would have some time to experiment and it should take around 2 weeks to rebuild it in the new stack. This would be just a mock migration, It wasn't going to replace the current portal, so it was a safe bet.
 
 Integrating it with Strapi was a breeze, and I was able to build feature by feature the core of the portal.
 
-Sure, I might have scratched my head a bit with Next.js default caching behaviour and screamed at revalidation for a bit but it was all good. So good in fact, that I decided a tweet wouldn't do it justice. No, I had to write a **presentation** about it.
+Sure, I might have scratched my head a bit with Next.js default caching behaviour and screamed at revalidation for a bit, but it was all good. So good in fact, that I decided a tweet wouldn't do it justice. No, I had to write a **presentation** about it.
 
 ## The presentation
 
@@ -71,7 +71,7 @@ I wanted to share my experience with the team, and I wanted to show them how gre
 -   Drupal 7 Total time to execute 200 requests: 73.2672 secs, the slower request being 60.7948 secs, the faster 3.0042 secs and the average 25.2373 secs.
 -   Next.js Total time to execute 200 requests: 11.3375 secs, the slower request being 11.2831 secs, the faster 0.0257 secs and the average 2.7676 secs.
 
-This were on similar priced environments, the difference was just absurd.
+These were on similar priced environments, the difference was just absurd.
 
 [Here](https://docs.google.com/presentation/d/1quosQQYQip9G31VwvaW0tP00N_DrXZ6yZwTxvlON3yw/edit?usp=sharing) is the full presentation if you're interested, it's in portuguese, but you can get the gist of it.
 
@@ -79,7 +79,7 @@ This were on similar priced environments, the difference was just absurd.
 
 Starting off, this project would be a pilot, if it all went well we would migrate other customers and the new stack would be the default in the future. But it had some constraints:
 
--   As a pilot, we would have to keep the current Drupal 7 portals running, so most of the team would have continue working on them. I would be the only developer working on the new stack with occasional help from another developer that would give me a hand with the backend broker integration.
+-   As a pilot, we would have to keep the current Drupal 7 portals running, so most of the team would have to continue working on them. I would be the only developer working on the new stack, with occasional help from another developer that would give me a hand with the backend broker integration.
 
 -   I had 1.5 months to deliver the new portal to homologation, and it had to have all the features the current portal had.
 
@@ -90,7 +90,7 @@ The initial development was smooth, I reutilized a lot of the code I had built o
 A few things to note here:
 
 -   Sensedia is an AWS partner here in Brazil, that means we almost exclusively use AWS services for everything.
--   All of the tests I had done were on Vercel, and I didn't get approval to use it for this product.
+-   All the tests I had done were on Vercel, and I didn't get approval to use it for this product.
 
 I had to build a preview environment for the new portal, and I had to do it on AWS. Amplify was basically a no-go, despite being the AWS way to deploy a Next.js app, it didn't support the features I needed, it had a lot of bugs, the documentation was not great, the overcharge on lambda and the build times were absurd.
 
@@ -100,17 +100,17 @@ Searching around for a solution I found out about [SST](https://sst.dev/) and [O
 
 I have to take a step back here and say the team at SST and Open-Next is amazing, they were able to help me a **lot**, and I was able to build a preview environment in a couple of days. They're doing an amazing work to try and make Next.js a truly open and agnostic serverless framework, SST constructs are amazing and Open-Next is a great way to deploy a Next.js app on AWS. That is, if you're not using features like Suspense with streaming or ISR — which is fixed as of Next 14.1.0 and Open-Next 2.3.5, at the time of writing
 
-The team at Open-Next have to do a lot of reverse engineering to deal with Vercel and AWS changes and limitations, and they're doing an amazing job at it. But it's a hard task, in V2 streaming often breaks, along with ISR due to changes either by Vercel or AWS. And altough the solution is evolving, and V3 seems really promising, it imposes some limitations, and that was still better than Amplify by a long shot.
+The team at Open-Next have to do a lot of reverse engineering to deal with Vercel and AWS changes and limitations, and they're doing an amazing job at it. But it's a hard task, in V2 streaming often breaks, along with ISR due to changes either by Vercel or AWS. And although the solution is evolving, and V3 seems really promising, it imposes some limitations, and that was still better than Amplify by a long shot.
 
-The preview environment was ready, and I was able to show it to the customer. They were happy with the results, and altough I was happy with the results, I wasn't satisfied with the state of Nextjs in a serverless environment outside Vercel.
+The preview environment was ready, and I was able to show it to the customer. They were happy with the results, and although I was happy with the results, I wasn't satisfied with the state of Next.js in a serverless environment outside Vercel.
 
 As the development went on, I started to notice a few things:
 
 -   Next's default caching behaviour was a pain, but it was manageable. I was able to make it work by not relying so much on ISR and using tanstack query with server actions to fetch data and refreshing the router when needed.
 
--   The most valuable thing that RSC would bring to the table was the ability to stream the page, it was not stable and it was a pain to debug. Often the connection would just hang for the timeout limit, which gave me a lot of headaches and lambdas frequently running for 1 minute, which is something you don't want to happen. So I couldn't use it, and ended up only using RSC as a data/processing layer, which was a shame, its potential is huge. This stemmed from the fact that AWS Lambda still has some issues with streaming, if you're deploying on vercel or using a long running server, you're good to go.
+-   The most valuable thing that RSC would bring to the table was the ability to stream the page, it was not stable and it was a pain to debug. Often the connection would just hang for the timeout limit, which gave me a lot of headaches and lambdas frequently running for 1 minute, which is something you don't want to happen. So I couldn't use it, and ended up only using RSC as a data/processing layer, which was a shame, its potential is huge. This stemmed from the fact that AWS Lambda still has some issues with streaming, if you're deploying on vercel or using a long-running server, you're good to go.
 
--   The prefetch was so agressive it would often cost a lot of money. The default behaviour at that time was to prefetch all the links on the page, that include tables with hundreds of items and the like. At the time I'm writing this, the default behaviour now is null, it's kind of funny that a boolean value defaults to null. The docs say that this default amounts to this:
+-   The prefetch was so aggressive it would often cost a lot of money. The default behaviour at that time was to prefetch all the links on the page, that include tables with hundreds of items and the like. At the time I'm writing this, the default behaviour now is null, it's kind of funny that a boolean value defaults to null. The docs say that this default amounts to this:
 
     > Prefetch behavior depends on whether the route is static or dynamic. For static routes, the full route will be prefetched (including all its data). For dynamic routes, the partial route down to the nearest segment with a loading.js boundary will be prefetched.
 
@@ -120,23 +120,23 @@ As the development went on, I started to notice a few things:
 
 And with customers wanting to have more and more complex features, the estimated costs of serverless were starting to get out of hand.
 
-I spent a lot of time staring at the AWS cost monitor, fiddling with the code and talking with the maintainers of Open-Next. I was able to make it work, thanks to them it was easy to deploy and monito the applications. But things weren't what I was expecting on other fronts due to those limitations.
+I spent a lot of time staring at the AWS cost monitor, fiddling with the code and talking with the maintainers of Open-Next. I was able to make it work, and thanks to them it was easy to deploy and monitor the applications. But things weren't what I was expecting on other fronts due to those limitations.
 
-I was able to deliver the portal to homologation in time, and it was a success. My team leader was happy, the customer was happy but I wasn't as happy as I should've been.
+I was able to deliver the portal to homologation in time, and it was a success. My team leader was happy, the customer was happy, but I wasn't as happy as I should've been.
 
-The perfomance simply wasn't where I wanted, as the Golang backend had to send a 9MB JSON to the homepage because of a feature the customer requested, which is already an average of 4s on the wire, and the page would sometimes take 10s to render on a cold start.
+The performance simply wasn't where I wanted, as the Golang backend had to send a 9MB JSON to the homepage because of a feature the customer requested, which is already an average of 4s on the wire, and the page would sometimes take 10s to render on a cold start.
 The costs were not what I was expecting, for the volume of requests we had, an EC2 instance would be cheaper.
 
 The DX was not there, the revalidation issues were a pain, the streaming was not stable, the prefetch was costing a lot of money.
 
-It was frustating.
+It was frustrating.
 
 ## The aftermath
 
 After the portal went live, I had a few meetings with the customer to discuss the future of the portal. They were happy with the results, their Drupal one was just that bad.
 After this feedback, my team were convinced to migrate the other portals to the new stack. They were happy with the performance — which was actually good in pages other than the homepage — the UX, the flexibility, the possibilities.
 
-My team leader gave the green light to migrate the other portals. And this time I had enough good sense to know we couldnt migrate the other portals just like that, it was not a good idea. Not with the current state of the new stack. A few things had to change before we could migrate the other portals, and I was not willing to go through the same pain again.
+My team leader gave the green light to migrate the other portals. And this time I had enough good sense to know we couldn't migrate the other portals just like that, it was not a good idea. Not with the current state of the new stack. A few things had to change before we could migrate the other portals, and I was not willing to go through the same pain again.
 
 First of all, we had to change our approach:
 
@@ -150,10 +150,10 @@ The reasoning behind this is that the light customers would not have the volume 
 
 With Open-Next V3 most of these issues seems to be solved, with the possibilite of having a hybrid deploy, with some parts of your app in lambda and others in ECS. But it's still in beta, and we're not willing to go through the same pain again. Until it's stable, that's the path we're going to follow. Their hybrid deploy is a great idea, and it's the best of both worlds, and I'm excited to see where it goes and how we can use it to improve even more our applications.
 
-I'm happy to say that the new stack is now in a good place, we've started to build more complex features and other developers are starting to work with it. It's hard making decisions like this, but it's part of the job. And altough it was painful I've learned a lot.
+I'm happy to say that the new stack is now in a good place, we've started to build more complex features and other developers are starting to work with it. It's hard making decisions like this, but it's part of the job. And although it was painful, I've learned a lot.
 
-Most importantly I learned that the best way to make a decision like this is to have a good understanding of the technology you're going to use, and to have a good understanding of the problems you're going to face. I was so excited about the new stack that I didn't take the time to understand the problems I was going to face, and that was a mistake.
+Most importantly, I learned that the best way to make a decision like this is to have a good understanding of the technology you're going to use, and to have a good understanding of the problems you're going to face. I was so excited about the new stack that I didn't take the time to understand the problems I was going to face, and that was a mistake.
 
 I also should've taken the time to understand the limitations of the technology I was going to use, unfortunately I didn't find a lot of information about the limitations of Next.js in a serverless environment outside Vercel, I had to learn it the hard way.
 
-I'm finally satisfied with the state it is after we changed our approach. There's still a lot of work to be done and a lot of things to learn, let's see where it goes.
+Furthermore, I'm finally satisfied with the state it is after we changed our approach. There's still a lot of work to be done and a lot of things to learn, let's see where it goes.
