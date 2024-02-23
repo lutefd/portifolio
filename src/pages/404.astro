@@ -1,0 +1,25 @@
+---
+import "@/styles/globals.css";
+import Base from "@/layouts/Base.astro";
+import Link from "@/components/Link";
+const title = "page not found ⁖ lutefd";
+---
+<Base {title} description="Page not found" image="https://og.luisdourado.com/?title=lutefd&description=Page%20Not%20Found">
+      <a
+    href="https://github.com/lutefd"
+    target="_blank"
+    slot="header-content"
+    class="text-primary/90 text-2xl font-light group-hover:text-primary transition-colors duration-700"
+    >lutefd</a
+  >
+<section class="w-full h-screen flex items-center justify-center ">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+        <div class="mx-auto max-w-screen-sm text-center">
+            <h1 class="mb-4 text-7xl tracking-tight font-extralight lg:text-9xl text-primary">404</h1>
+            <p class="mb-4 text-3xl tracking-tight font-light text-gray-900 md:text-4xl ">Something's missing.</p>
+            <p class="mb-4 text-lg font-light text-muted-foreground ">Sorry, we can't find that page. You'll find lots to explore on the home page. </p>
+            <Link href="/" className="inline-flex text-primary bg-primary-600 focus:ring-1 focus:outline-none focus:ring-ring font-light rounded-lg text-sm px-5 py-2.5 text-center my-4">Back to Homepage</Link>
+        </div>   
+    </div>
+</section>
+</Base>
