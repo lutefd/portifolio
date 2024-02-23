@@ -4,18 +4,25 @@ import Link from "@/components/Link";
 import { formatDate } from "@/lib/utils";
 type Props = {
   post: CollectionEntry<"blog"> | CollectionEntry<"work-blog">;
+  
 };
 const {
   post: {
-    data: { title, date },
+    data: { title, date, description },
     slug,
   },
 } = Astro.props;
 ---
 
-<article class="flex justify-between">
-  <Link href={`/blog/${slug}`}>
-    <span>{title}</span>
+<article class="flex justify-between max-sm:w-sm">
+  <div class="flex flex-col w-full">
+<div class="flex justify-between items-center gap-2 ">
+
+  <Link href={`/blog/${slug}`} className="truncate max-sm:w-sm">
+    <span class="truncate">{title}</span>
   </Link>
-  <span>{formatDate(date)}</span>
+  <span class="text-muted-foreground text-xs">{formatDate(date)}</span>
+</div>
+    <span class="truncate text-xs text-muted-foreground">{description}</span>
+  </div>
 </article>
