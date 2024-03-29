@@ -17,6 +17,7 @@
     "@fontsource-variable/jetbrains-mono": "^5.0.19",
     "@loglib/tracker": "^0.8.0",
     "@radix-ui/react-icons": "^1.3.0",
+    "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-tooltip": "^1.0.7",
     "@types/react": "^18.2.58",
     "@types/react-dom": "^18.2.19",

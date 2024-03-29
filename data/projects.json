@@ -4,11 +4,7 @@
 		"description": "Auth system with TOTP, Email 2FA, role-based access control and other features using Lucia as the base lib",
 		"repository": "Lutefd/authkit-lucia"
 	},
-	{
-		"name": "Form Builder",
-		"description": "Build forms with a drag and drop interface, analytics, validation and more, built with nextjs",
-		"repository": "Lutefd/form-builder"
-	},
+
 	{
 		"name": "SFMS",
 		"description": "File Management System with S3 and R2 support",
