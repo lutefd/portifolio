@@ -94,7 +94,7 @@ A few things to note here:
 
 I had to build a preview environment for the new portal, and I had to do it on AWS. Amplify was basically a no-go, despite being the AWS way to deploy a Next.js app, it didn't support the features I needed, it had a lot of bugs, the documentation was not great, the overcharge on lambda and the build times were absurd.
 
-Deploying it on a EC2 instance was also a no-go at that time, the way the new stack was sold to the team was by selling the idea of serverless along with it. This was the time to experiment with serverless, and I was eager to do so. As I knew that Next.js was designed to work with serverless, I thought this was the best way to go.
+Deploying it on a ECS cluster was also a no-go at that time, the way the new stack was sold to the team was by selling the idea of serverless along with it. This was the time to experiment with serverless, and I was eager to do so. As I knew that Next.js was designed to work with serverless, I thought this was the best way to go.
 
 Searching around for a solution I found out about [SST](https://sst.dev/) and [Open-Next](https://open-next.js.org/), it seemed like a great solution. It still had some rough edges, mainly because of the weird behaviour Next.js has, the black magic Vercel does when deploying a Next.js app and the AWS Lambda limitations, but it would make do.
 
@@ -125,7 +125,7 @@ I spent a lot of time staring at the AWS cost monitor, fiddling with the code an
 I was able to deliver the portal to homologation in time, and it was a success. My team leader was happy, the customer was happy, but I wasn't as happy as I should've been.
 
 The performance simply wasn't where I wanted, as the Golang backend had to send a 9MB JSON to the homepage because of a feature the customer requested, which is already an average of 4s on the wire, and the page would sometimes take 10s to render on a cold start.
-The costs were not what I was expecting, for the volume of requests we had, an EC2 instance would be cheaper.
+The costs were not what I was expecting, for the volume of requests we had, even deploying it in ECS with Fargate would be cheaper.
 
 The DX was not there, the revalidation issues were a pain, the streaming was not stable, the prefetch was costing a lot of money.
 
@@ -144,9 +144,9 @@ First of all, we had to change our approach:
 
 -   The Golang backend was pretty great, but we were not using it to its full potential. We need to delegate most of the processing work to it and have a server side caching layer with Redis for the huge chunks that come back from the API Gateway Manager.
 
--   The frontend had to change as well, the first thing we had to have were two different versions of the product, one for light customers and one for heavy customers. The light customers would have a static version of the portal with no fancy features like streaming and loads of data on the homepage, and the heavy customers would have the full version of the portal. The first one would be deployed with Open-Next/SST and the second one would be deployed on EC2.
+-   The frontend had to change as well, the first thing we had to have were two different versions of the product, one for light customers and one for heavy customers. The light customers would have a static version of the portal with no fancy features like streaming and loads of data on the homepage, and the heavy customers would have the full version of the portal. The first one would be deployed with Open-Next/SST and the second one would be deployed on a ECS cluster, given the volume that could be later converted into EKS.
 
-The reasoning behind this is that the light customers would not have the volume of requests that would make the costs go out of hand, and all of Next.js features work out of the box when you deploy it to a EC2 instance and just run it as a normal node app. So we would have the best of both worlds.
+The reasoning behind this is that the light customers would not have the volume of requests that would make the costs go out of hand, and all of Next.js features work out of the box when you use it on a Docker container instance and just run it as a normal node app. So we would have the best of both worlds.
 
 With Open-Next V3 most of these issues seems to be solved, with the possibilite of having a hybrid deploy, with some parts of your app in lambda and others in ECS. But it's still in beta, and we're not willing to go through the same pain again. Until it's stable, that's the path we're going to follow. Their hybrid deploy is a great idea, and it's the best of both worlds, and I'm excited to see where it goes and how we can use it to improve even more our applications.
 
