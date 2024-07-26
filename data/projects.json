@@ -1,28 +1,33 @@
 [
-	{
-		"name": "Authkit Lucia",
-		"description": "Auth system with TOTP, Email 2FA, role-based access control and other features using Lucia as the base lib",
-		"repository": "Lutefd/authkit-lucia"
-	},
+  {
+    "name": "Authkit Lucia",
+    "description": "Auth system with TOTP, Email 2FA, role-based access control and other features using Lucia as the base lib",
+    "repository": "Lutefd/authkit-lucia"
+  },
+  {
+    "name": "Redis Server",
+    "description": "A redis custom redis server built to facilitate testing and spinning up temporary redis instances from scratch",
+    "repository": "Lutefd/redis-g"
+  },
+  {
+    "name": "Rss Agregator",
+    "description": "A Go RSS Aggregator that fetches feeds from multiple sources and aggregates them into a single feed",
+    "repository": "Lutefd/aggregator"
+  },
+  {
+    "name": "Golang WebServer",
+    "description": "Simple but complete web server written in Go",
+    "repository": "Lutefd/misc-api"
+  },
 
-	{
-		"name": "SFMS",
-		"description": "File Management System with S3 and R2 support",
-		"repository": "Lutefd/sfms"
-	},
-	{
-		"name": "Golang WebServer",
-		"description": "Simple but complete web server written in Go",
-		"repository": "Lutefd/misc-api"
-	},
-	{
-		"name": "Docs Bot",
-		"description": "A documentation provider bot for discord",
-		"repository": "Lutefd/ds-docs-botgo"
-	},
-	{
-		"name": "OG Generator",
-		"description": "Generate OpenGraph images for your website",
-		"repository": "Lutefd/og-gen"
-	}
+  {
+    "name": "Docs Bot",
+    "description": "A documentation provider bot for discord",
+    "repository": "Lutefd/ds-docs-botgo"
+  },
+  {
+    "name": "OG Generator",
+    "description": "Generate OpenGraph images for your website",
+    "repository": "Lutefd/og-gen"
+  }
 ]
