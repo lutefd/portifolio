@@ -1,0 +1,48 @@
+---
+import "@/styles/globals.css";
+import ProjectCard from "@/components/project-card";
+import Base from "@/layouts/Base.astro";
+import projects from "data/projects.json";
+const title = "music jam ⁖ lutefd";
+import topTracks from "data/spotify.json";
+---
+
+<Base
+  {title}
+  description="Current music I'm listening to"
+  image={`https://og.luisdourado.com/?title=lutefd&description=Current music I'm listening to`}
+>
+  <main class="pb-4 md:pb-6 max-w-4xl">
+    <h1 class="text-xl md:text-2xl font-semibold text-primary mt-0 mb-2">
+      What I'm listening to
+    </h1>
+    <p
+      class="text-primary max-w-4xl border-b-[0.5px] border-zinc-500 text-lg pb-4"
+    >
+      <small>
+        Playlist updated every week with the music I've been listening to
+      </small>
+    </p>
+  </main>
+
+  <section class="pb-4 max-sm:max-w-sm max-w-2xl">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {
+        topTracks.items.map((item) => (
+          <div class="bg-white p-2 max-w-96 rounded-lg shadow-md">
+            <img
+              src={item.album.images[0].url}
+              alt={item.album.name}
+              class="w-full h-64 object-cover rounded-md mb-4"
+            />
+            <h2 class="text-xl font-semibold mb-2">{item.name}</h2>
+            <p class="text-gray-600 mb-2">by {item.album.artists[0].name}</p>
+            <a href={item.album.external_urls.spotify} class=" hover:underline">
+              Listen on Spotify
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</Base>
