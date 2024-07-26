@@ -5,7 +5,11 @@ export async function GET(context) {
   const blog = await getCollection("blog");
   const workBlog = await getCollection("work-blog");
   const filteredBlog = blog.filter((post) => !post.data.isDraft);
-  const filteredWorkBlog = workBlog.filter((post) => !post.data.isDraft);
+  const filteredWorkBlog = workBlog.filter(
+    (post) =>
+      !post.data.isDraft &&
+      post.data.title !== "Migrating a Product from Drupal to Next.js",
+  );
 
   return rss({
     site: context.site || "https://luisdourado.com",
