@@ -29,7 +29,7 @@ export async function GET(context) {
         title: post.data.title,
         site: context.site || "https://luisdourado.com",
         description: post.data.description,
-        link: `https://luisdourado.com/work-blog/${post.slug}`,
+        link: `https://luisdourado.com/work/${post.slug}`,
         pubDate: post.data.date,
       })),
     ],
