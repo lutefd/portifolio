@@ -5,6 +5,11 @@
     "repository": "Lutefd/authkit-lucia"
   },
   {
+    "name": "Ai Router",
+    "description": "Flexible and scalable solution for routing AI requests to multiple providers, such as OpenAI and Anthropic.",
+    "repository": "Lutefd/ai-router"
+  },
+  {
     "name": "Redis Server",
     "description": "A redis custom redis server built to facilitate testing and spinning up temporary redis instances from scratch",
     "repository": "Lutefd/redis-g"
@@ -14,12 +19,6 @@
     "description": "A Go RSS Aggregator that fetches feeds from multiple sources and aggregates them into a single feed",
     "repository": "Lutefd/aggregator"
   },
-  {
-    "name": "Golang WebServer",
-    "description": "Simple but complete web server written in Go",
-    "repository": "Lutefd/misc-api"
-  },
-
   {
     "name": "Docs Bot",
     "description": "A documentation provider bot for discord",
