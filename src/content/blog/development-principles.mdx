@@ -1,0 +1,345 @@
+---
+title: 'Development Principles'
+description: "A thoughtful approach to software development that can help you build better software faster."
+date: 'August 31, 2024'
+formattedTitle: 'Development Principles ⁖ lutefd'
+isDraft: true
+---
+
+# How Principles Can Help You Become a Better Programmer
+
+Programming is a journey of continuous improvement, one that I've been on for a few years now. As we gain experience, we encounter practices and principles that help us refine our craft, leading to higher-quality code. If you've ever been told that your code could be better, don't be discouraged—this is a common part of the learning process. I've been there myself, and I can tell you that everyone writes flawed code at some point. The great news is that there are straightforward ways to enhance your skills. This post will guide you through key principles and practices that have helped me become a better programmer, and I believe they can do the same for you.
+
+## 1. Embrace Programming Standards
+
+One of the first steps to becoming a better programmer is to adhere to programming standards. I remember when I first started coding, my files were a mess of inconsistent styles and structures. It was only when I embraced standards that I saw a real improvement in my code quality and readability.
+
+Standards provide guidelines for aspects like whitespace, file structure, and other coding philosophies. By following these conventions, you ensure that your code is consistent and easy to read. This consistency is crucial, especially when working in a team, as it fosters a shared understanding and smooth collaboration.
+
+Let me give you a quick example in Go:
+
+```go
+// Before: Inconsistent styling
+func dosomething(x int,y string)string{
+if x>10{
+return y+"is big"
+}else{
+return y+"is small"
+}}
+
+// After: Following Go standards
+func doSomething(x int, y string) string {
+    if x > 10 {
+        return y + " is big"
+    }
+    return y + " is small"
+}
+```
+
+See how much clearer the second version is? It's not just about aesthetics; it's about making your code easier to understand and maintain.
+
+If your team doesn't have a set standard, you can choose from widely-accepted conventions available in the programming community. In my experience, adopting these standards will significantly improve the readability and maintainability of your code, making it easier for you and others to understand.
+
+## 2. Follow Design Principles
+
+Programming design principles are guidelines that help you write better code. These principles act as general guides, steering you toward best practices. Among these, the SOLID principles are some of the most impactful. I've found that understanding and applying these principles has transformed the way I approach software design.
+
+### **Single Responsibility Principle (SRP)**
+
+This principle encourages you to break down your code into smaller modules, each with a single responsibility. If a class or function does multiple unrelated tasks, it's better to split it into separate components. This makes your code easier to understand, test, and reuse.
+
+Here's an example in Go that I wish I had known earlier in my career:
+
+```go
+// Before: A function doing too much
+func processOrder(order Order) error {
+    // Validate order
+    if order.Total <= 0 {
+        return errors.New("invalid order total")
+    }
+    // Save to database
+    db.Save(order)
+    // Send confirmation email
+    sendEmail(order.CustomerEmail, "Order Confirmation", orderDetails(order))
+    // Update inventory
+    for _, item := range order.Items {
+        updateInventory(item.ID, item.Quantity)
+    }
+    return nil
+}
+
+// After: Breaking it down into single responsibilities
+func processOrder(order Order) error {
+    if err := validateOrder(order); err != nil {
+        return err
+    }
+    if err := saveOrder(order); err != nil {
+        return err
+    }
+    if err := sendOrderConfirmation(order); err != nil {
+        return err
+    }
+    return updateInventoryForOrder(order)
+}
+
+func validateOrder(order Order) error {
+    if order.Total <= 0 {
+        return errors.New("invalid order total")
+    }
+    return nil
+}
+
+func saveOrder(order Order) error {
+    return db.Save(order)
+}
+
+func sendOrderConfirmation(order Order) error {
+    return sendEmail(order.CustomerEmail, "Order Confirmation", orderDetails(order))
+}
+
+func updateInventoryForOrder(order Order) error {
+    for _, item := range order.Items {
+        if err := updateInventory(item.ID, item.Quantity); err != nil {
+            return err
+        }
+    }
+    return nil
+}
+```
+
+This refactoring makes each function much easier to understand, test, and maintain. Trust me, your future self will thank you for this level of organization.
+
+### **Open-Closed Principle (OCP)**
+
+The Open-Closed Principle advises that software entities should be open for extension but closed for modification. Instead of modifying existing code to add new functionality, extend it. This approach reduces the risk of introducing bugs into stable code.
+
+### **Liskov Substitution Principle (LSP)**
+
+LSP suggests that objects of a superclass should be replaceable with objects of a subclass without affecting the program's correctness. When extending classes, ensure that the subclass maintains the expected behavior of the superclass. This principle ensures that your code remains robust and predictable.
+
+### **Interface Segregation Principle (ISP)**
+
+The ISP advises that modules should not depend on interfaces they don't use. Instead, create smaller, more specific interfaces. This modularity makes your code easier to manage and test.
+
+Here's a Go example demonstrating ISP:
+
+```go
+// Before: A large interface that many structs only partially implement
+type Worker interface {
+    DoWork()
+    TakeBreak()
+    GetPaid()
+    FileTicket()
+}
+
+// After: Smaller, more focused interfaces
+type Worker interface {
+    DoWork()
+}
+
+type BreakTaker interface {
+    TakeBreak()
+}
+
+type Payable interface {
+    GetPaid()
+}
+
+type TicketFiler interface {
+    FileTicket()
+}
+
+// Now structs can implement only what they need
+type Developer struct{}
+
+func (d Developer) DoWork() {
+    fmt.Println("Writing code")
+}
+
+func (d Developer) TakeBreak() {
+    fmt.Println("browsing Reddit")
+}
+
+func (d Developer) FileTicket() {
+    fmt.Println("Creating a Jira ticket")
+}
+
+// A contractor might not need all methods
+type Contractor struct{}
+
+func (c Contractor) DoWork() {
+    fmt.Println("Completing assigned task")
+}
+
+func (c Contractor) GetPaid() {
+    fmt.Println("Invoicing for work done")
+}
+```
+
+This approach allows for more flexible and maintainable code structures.
+
+### **Dependency Inversion Principle (DIP)**
+
+The DIP promotes the use of abstractions rather than concrete implementations. By depending on interfaces or abstract classes, you decouple your code, making it more flexible and easier to maintain. This also allows you to swap out implementations without affecting the rest of your code.
+
+Applying the SOLID (see what I did there?) principles leads to decoupled, modular code that is easier to maintain, scale, reuse, and test. I've found that these principles, while sometimes challenging to apply at first, have consistently led to more robust and flexible codebases.
+
+Of course, the SOLID principles are not the only way to write better code. Nor is it the only way to write maintainable code or should be followed strictly.
+There will always be exceptions to the rules, but it's important to remember that following these principles is a continuous process and not a one-time event. It will take time and effort to develop good habits, but the rewards are well worth it.
+
+## 3. Utilize Design Patterns
+
+Design patterns provide reusable solutions to common programming problems. They are not rigid implementations but rather templates that can be adapted to fit specific needs. Understanding and applying design patterns can significantly improve the structure and readability of your code.
+Along with helping you thinkging about your code, design patterns can also help you thinkg of your architecture. They can help you identify the right abstractions to use, and how to combine them to create a better solution.
+
+### **Creational Patterns**
+
+Creational patterns help manage object creation, making your code more modular and flexible. An example is the Factory Method pattern, which creates objects based on a set of criteria while abstracting the instantiation logic.
+
+Here's a simple Factory Method example in Go:
+
+```go
+type PaymentMethod interface {
+    Pay(amount float64) string
+}
+
+type CashPayment struct{}
+
+func (c CashPayment) Pay(amount float64) string {
+    return fmt.Sprintf("Paid %.2f using cash", amount)
+}
+
+type CreditCardPayment struct{}
+
+func (cc CreditCardPayment) Pay(amount float64) string {
+    return fmt.Sprintf("Paid %.2f using credit card", amount)
+}
+
+func GetPaymentMethod(method string) (PaymentMethod, error) {
+    switch method {
+    case "cash":
+        return CashPayment{}, nil
+    case "credit":
+        return CreditCardPayment{}, nil
+    default:
+        return nil, fmt.Errorf("Payment method %s not supported", method)
+    }
+}
+
+// Usage
+method, err := GetPaymentMethod("cash")
+if err != nil {
+    fmt.Println(err)
+    return
+}
+fmt.Println(method.Pay(42.42))
+```
+
+This pattern allows for easy extension of payment methods without modifying existing code.
+
+### **Structural Patterns**o
+
+Structural patterns deal with object composition, promoting better interaction between classes. The Adapter pattern, for example, allows incompatible interfaces to work together by wrapping a module and adapting its interface.
+
+### **Behavioral Patterns**
+
+Behavioral patterns focus on communication between objects. The Observer pattern is a common behavioral pattern that facilitates a publish-subscribe model, enabling objects to react to events.
+
+Design patterns help solve recurring problems and create a universal vocabulary among developers, making communication and understanding more straightforward. In my experience, knowing when and how to apply these patterns can significantly improve the quality and maintainability of your code.
+
+## 4. Practice Good Naming Conventions
+
+Clear naming conventions are crucial for writing readable and maintainable code. Poorly named variables, functions, or classes can lead to confusion and make it difficult to understand the code's purpose. I've spent countless hours deciphering cryptic variable names, and trust me, it's not a fun experience.
+
+### **Use Descriptive Names**
+
+Avoid using unnecessary encodings or cryptic abbreviations. Instead, choose names that clearly describe the purpose of the variable or function. This approach makes your code more understandable.
+
+God knows how hard it is to come up with a good name for a variable or function and how much time developers around the world spent on deciphering cryptic names. Not a fun experience.
+
+```go
+// Bad
+func calc(a, b int) int {
+    return a + b
+}
+
+// Good
+func calculateSum(firstNumber, secondNumber int) int {
+    return firstNumber + secondNumber
+}
+```
+
+### **Replace Magic Values with Named Constants**
+
+Using named constants instead of hard-coded values clarifies their meaning and helps keep your code consistent. It also makes it easier to update values used in multiple places.
+
+```go
+// Bad
+if user.Age >= 18 {
+    // Allow access
+}
+
+// Good
+const LegalAge = 18
+if user.Age >= LegalAge {
+    // Allow access
+}
+```
+
+### **Balance Clarity and Conciseness**
+
+Aim for names that are clear but not overly verbose. Good naming practices make your code self-documenting, reducing the need for excessive comments and making it easier to understand.
+
+## 5. Prioritize Testing
+
+Testing is an essential practice for ensuring that your code behaves as expected. Writing tests might seem challenging at first, but it's crucial for maintaining code quality and reliability. I'll admit, I used to view testing as a chore, but now I see it as an invaluable tool for catching bugs early and refactoring with confidence.
+
+I also think that not everything needs to be tested. Sometimes, it's better to focus on the parts of your code that are most critical to your application's functionality. But I could go into another rant about testing here, so I'll leave it at that.
+
+### **End-to-End Testing**
+
+End-to-end tests simulate user interactions with the entire application. They validate that the system works as a whole, providing a user-centric view of functionality. Although they can be complex to set up, they are invaluable for catching integration issues.
+
+### **Unit Testing**
+
+Unit tests focus on individual modules in isolation. They provide quick feedback on whether specific parts of your code are functioning correctly, making them a fundamental part of any testing strategy.
+
+Here's a simple example of a unit test in Go:
+
+```go
+func TestCalculateSum(t *testing.T) {
+    result := calculateSum(3, 4)
+    expected := 7
+    if result != expected {
+        t.Errorf("calculateSum(3, 4) = %d; want %d", result, expected)
+    }
+}
+```
+
+### **Integration Testing**
+
+Integration tests examine how different modules work together. They help identify issues that might arise from interactions between various parts of the code.
+
+Applying SOLID principles makes testing easier by encouraging modular, decoupled code that is simpler to isolate and validate. I've found that well-tested code is not only more reliable but also easier to refactor and maintain over time.
+
+## 6. Manage Your Time Effectively
+
+Effective time management is crucial in programming. Estimating the time required for tasks can be challenging, so a common practice is to double or triple your initial estimate. This approach accounts for unforeseen problems, ensuring you have enough time to deliver quality work. It's better to overestimate and finish early than to underestimate and miss deadlines.
+
+I've learned this lesson the hard way, promising quick turnarounds only to find myself working late nights to meet unrealistic deadlines. Now, I always factor in some buffer time (commonly referred to as slack) when estimating tasks, and it's made a world of difference in both the quality of my work and my stress levels.
+
+## 7. Take Your Time to Plan and Execute
+
+While it might be tempting to rush through projects, especially when deadlines are tight, thoughtful planning is crucial for long-term success. Rushing can lead to technical debt and future maintenance challenges. Take the time to carefully consider architectural decisions and plan your approach. Building a solid foundation early on will save time and effort in the long run.
+
+I've worked on one too many projects where we skipped the planning phase to start coding immediately. We thought we were saving time, but we ended up rewriting large portions of the codebase later because our initial architecture couldn't scale. Now, I always insist on proper planning, even if it means pushing back on tight deadlines.
+
+## Conclusion
+
+By following these principles and practices, you can become a better programmer. Focus on writing code that is clear, maintainable, and thoughtfully structured. Remember the words of Martin Fowler: *"Any fool can write code that a computer can understand. Good programmers write code that humans can understand."* Strive to write code that is not only functional but also easy to read and maintain.
+
+In my journey as a programmer, adhering to these principles has not only improved my code quality but also made programming more enjoyable. It's satisfying to look at a well-structured, clean codebase and know that it will be easy for others (or future you) to work with.
+
+Remember, becoming a better programmer is a continuous process. Don't be discouraged if you don't get everything right immediately. Keep learning, keep practicing, and most importantly, keep coding. With time and dedication, you'll see significant improvements in your skills and the quality of your work.
+
+Now, armed with these principles, go ahead and start building the projects you've been prrastinating on. You'll be amazed at how much you can accomplish with a little bit of effort and dedication.
