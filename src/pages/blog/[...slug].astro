@@ -30,11 +30,19 @@ const dateFormatted = formatDate(date);
 const { Content } = await post.render();
 ---
 
-<Base {formattedTitle} {title} description={description} image={`https://og.luisdourado.com/?title=${title}&description=${description}`}>
+<Base
+  {formattedTitle}
+  {title}
+  description={description}
+  image={`https://dynamic-og-image-generator.vercel.app//api/generate?title=${title}&description=${description}&author=Luis%20DouradowebsiteUrl=https://luisdourado.com&theme=github`}
+>
   <div class="prose prose-slate tracking-tight max-w-4xl pb-10">
     {
       isDraft && (
-        <blockquote class="my-8 bg-foreground text-primary-foreground py-4 px-4 text-base" role="alert">
+        <blockquote
+          class="my-8 bg-foreground text-primary-foreground py-4 px-4 text-base"
+          role="alert"
+        >
           This post is only a <strong>draft</strong>. if I sent you this, please
           don't share it and send your feedback!
         </blockquote>
@@ -46,6 +54,6 @@ const { Content } = await post.render();
       </h1>
       <p class="text-xs text-muted-foreground mt-0 mb-0">{dateFormatted}</p>
     </div>
-      <Content />
-    </div>
+    <Content />
+  </div>
 </Base>
