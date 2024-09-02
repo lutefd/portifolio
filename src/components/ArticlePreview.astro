@@ -20,6 +20,6 @@ const {
   <Link href={`/blog/${slug}`}>
     <span class="text-lg font-semibold">{title}</span>
   </Link>
-  <span>{description}</span>
+  <span class="truncate">{description}</span>
   <span>{formatDate(date)}</span>
 </article>
