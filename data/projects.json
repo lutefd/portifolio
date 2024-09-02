@@ -10,6 +10,11 @@
     "repository": "Lutefd/ai-router"
   },
   {
+    "name": "Currverter",
+    "description": "Go-based service with real-time rates, user auth, and caching. Features PostgreSQL, Redis, and Docker. Ideal for currency services or as a Go api reference.",
+    "repository": "Lutefd/currency-api"
+  },
+  {
     "name": "Redis Server",
     "description": "A redis custom redis server built to facilitate testing and spinning up temporary redis instances from scratch",
     "repository": "Lutefd/redis-g"
@@ -18,11 +23,6 @@
     "name": "Rss Agregator",
     "description": "A Go RSS Aggregator that fetches feeds from multiple sources and aggregates them into a single feed",
     "repository": "Lutefd/aggregator"
-  },
-  {
-    "name": "Docs Bot",
-    "description": "A documentation provider bot for discord",
-    "repository": "Lutefd/ds-docs-botgo"
   },
   {
     "name": "OG Generator",
