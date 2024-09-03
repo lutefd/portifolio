@@ -57,3 +57,155 @@ const { Content } = await post.render();
     <Content />
   </div>
 </Base>
+
+<style is:global>
+  .code-block {
+    position: relative;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    overflow: hidden;
+    margin: 1rem 0;
+  }
+  .code-block-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f7fafc;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0.25rem 0.5rem;
+  }
+  .language-tag {
+    font-size: 0.75rem;
+    color: #4a5568;
+    font-weight: 600;
+  }
+  .copy-button {
+    font-size: 0.75rem;
+    color: #4a5568;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .code-block pre {
+    margin: 0;
+    padding: 1rem;
+    background-color: #2d3748;
+    color: #e2e8f0;
+    overflow-x: auto;
+  }
+  .code-block pre code {
+    font-family: "Fira Code", monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+</style>
+
+<script>
+  interface LanguageColor {
+    base: string;
+    hover: string;
+  }
+
+  const languageColors: Record<string, LanguageColor> = {
+    go: { base: "#00ADD8", hover: "#00E0FF" },
+    html: { base: "#E34C26", hover: "#FFA500" },
+    css: { base: "#563D7C", hover: "#7F7F7F" },
+    javascript: { base: "#F7DF1E", hover: "#FFD700" },
+    js: { base: "#F7DF1E", hover: "#FFD700" },
+    typescript: { base: "#3178C6", hover: "#00E0FF" },
+    ts: { base: "#3178C6", hover: "#00E0FF" },
+  };
+
+  function setLanguageColor(
+    languageTag: HTMLSpanElement,
+    topbar: HTMLDivElement,
+    language: string,
+  ): void {
+    const colors = languageColors[language] || {
+      base: "#000000",
+      hover: "#000000",
+    };
+    languageTag.style.color = colors.base;
+
+    topbar.addEventListener("mouseenter", () => {
+      languageTag.style.transition = "color 0.2s";
+      languageTag.style.color = colors.hover;
+    });
+
+    topbar.addEventListener("mouseleave", () => {
+      languageTag.style.transition = "color 0.2s";
+      languageTag.style.color = colors.base;
+    });
+  }
+
+  function createCopyButton(): HTMLButtonElement {
+    const copyButton = document.createElement("button");
+    copyButton.className = "copy-button";
+    copyButton.textContent = "Copy";
+
+    copyButton.addEventListener("click", () => {
+      const codeBlock = copyButton.closest(".code-block");
+      if (!codeBlock) return;
+
+      const preElement = codeBlock.querySelector("pre");
+      if (!preElement) return;
+
+      const code = preElement.textContent || "No code found";
+      navigator.clipboard
+        .writeText(code)
+        .then(() => {
+          copyButton.textContent = "Copied!";
+          setTimeout(() => {
+            copyButton.textContent = "Copy";
+          }, 2000);
+        })
+        .catch((error) => {
+          console.error("Failed to copy code:", error);
+        });
+    });
+
+    return copyButton;
+  }
+
+  function setupCodeBlock(block: HTMLPreElement): void {
+    const wrapper = document.createElement("div");
+    wrapper.className = "code-block";
+
+    if (block.parentNode) {
+      block.parentNode.insertBefore(wrapper, block);
+    } else {
+      console.warn("Code block has no parent node, skipping setup.");
+      return;
+    }
+
+    const topbar = document.createElement("div");
+    topbar.className = "code-block-topbar";
+    wrapper.appendChild(topbar);
+
+    const language = block.getAttribute("data-language") || "plaintext";
+    const languageTag = document.createElement("span");
+    languageTag.className = "language-tag";
+    languageTag.textContent = language === "js" ? "javascript" : language;
+
+    setLanguageColor(languageTag, topbar, language);
+    topbar.appendChild(languageTag);
+
+    topbar.appendChild(createCopyButton());
+    wrapper.appendChild(block);
+  }
+
+  function setupCodeBlocks(): void {
+    const codeBlocks = document.querySelectorAll("pre");
+    codeBlocks.forEach((block) => {
+      if (block instanceof HTMLPreElement) {
+        setupCodeBlock(block);
+      } else {
+        console.warn(
+          "Found a 'pre' element that is not an HTMLPreElement, skipping.",
+        );
+      }
+    });
+  }
+
+  document.addEventListener("astro:page-load", setupCodeBlocks);
+</script>
