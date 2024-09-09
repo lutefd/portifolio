@@ -2,31 +2,31 @@
   {
     "name": "Authkit Lucia",
     "description": "Auth system with TOTP, Email 2FA, role-based access control and other features using Lucia as the base lib",
-    "repository": "Lutefd/authkit-lucia"
+    "repository": "lutefd/authkit-lucia"
   },
   {
     "name": "Ai Router",
     "description": "Flexible and scalable solution for routing AI requests to multiple providers, such as OpenAI and Anthropic.",
-    "repository": "Lutefd/ai-router"
+    "repository": "lutefd/ai-router"
   },
   {
-    "name": "Currverter",
+    "name": "Portgen",
+    "description": "A Go command-line tool to generate random unused ports, for when you're tired of finding ports manually.",
+    "repository": "lutefd/portgen"
+  },
+  {
+    "name": "Currency Converter",
     "description": "Go-based service with real-time rates, user auth, and caching. Features PostgreSQL, Redis, and Docker. Ideal for currency services or as a Go api reference.",
-    "repository": "Lutefd/currency-api"
+    "repository": "lutefd/currency-api"
   },
   {
     "name": "Redis Server",
     "description": "A redis custom redis server built to facilitate testing and spinning up temporary redis instances from scratch",
-    "repository": "Lutefd/redis-g"
+    "repository": "lutefd/redis-g"
   },
   {
     "name": "Rss Agregator",
     "description": "A Go RSS Aggregator that fetches feeds from multiple sources and aggregates them into a single feed",
-    "repository": "Lutefd/aggregator"
-  },
-  {
-    "name": "OG Generator",
-    "description": "Generate OpenGraph images for your website",
-    "repository": "Lutefd/og-gen"
+    "repository": "lutefd/aggregator"
   }
 ]
