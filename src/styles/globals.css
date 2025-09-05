@@ -51,10 +51,10 @@
 
 @layer base {
 	* {
-		@apply border-border;
+		@apply border-[hsl(var(--border))];
 	}
 	body {
-		@apply bg-background text-foreground;
+		@apply bg-[hsl(var(--background))] text-[hsl(var(--foreground))];
 	}
 }
 
@@ -63,5 +63,5 @@
 	height: 0.5rem;
 }
 ::-webkit-scrollbar-thumb {
-	@apply bg-neutral-500;
+	background-color: rgb(115 115 115); /* neutral-500 */
 }
